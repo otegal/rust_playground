@@ -2,6 +2,8 @@ use std::cmp::Ordering;
 use rayon;
 use super::SortOrder;
 
+const PARALLEL_THRESHOLD: usize = 4096;
+
 // pub と修飾子をつけることで他モジュールからも呼び出せるパブリックな関数にする。
 pub fn sort<T: Ord>(x: &mut [T], order: &SortOrder) -> Result<(), String> {
     match *order {
@@ -26,8 +28,14 @@ fn do_sort<T, F>(x: &mut [T], forward: bool, comparator: &F)
 {
     if x.len() > 1 {
         let mid_point = x.len() / 2;
-        do_sort(&mut x[..mid_point], true, comparator);  // xのスライスの最初からmid_pointまで
-        do_sort(&mut x[mid_point..], false, comparator); // xのスライスのmidpointから最後まで
+
+        if mid_point >= PARALLEL_THRESHOLD { // 並列処理
+            rayon::join(||vdo_sort(&mut x[..mid_point], true, comparator),
+                        || do_sort(&mut x[mid_point..], false, comparator));
+        } else { // 順次処理
+            do_sort(&mut x[..mid_point], true, comparator);
+            do_sort(&mut x[mid_point..], false, comparator);
+        }
         sub_sort(x, forward, comparator);
     }
 }
