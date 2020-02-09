@@ -30,12 +30,13 @@ fn do_sort<T, F>(x: &mut [T], forward: bool, comparator: &F)
 {
     if x.len() > 1 {
         let mid_point = x.len() / 2;
+        let (first, second) = x.split_at_mut(mid_point);
         if mid_point >= PARALLEL_THRESHOLD { // 並列処理
-            rayon::join(|| do_sort(&mut x[..mid_point], true, comparator),
-                        || do_sort(&mut x[mid_point..], false, comparator));
+            rayon::join(|| do_sort(first, true, comparator),
+                        || do_sort(second, false, comparator));
         } else { // 順次処理
-            do_sort(&mut x[..mid_point], true, comparator);
-            do_sort(&mut x[mid_point..], false, comparator);
+            do_sort(first, true, comparator);
+            do_sort(second, false, comparator);
         }
         sub_sort(x, forward, comparator);
     }
