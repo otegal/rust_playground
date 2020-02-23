@@ -18,7 +18,7 @@ struct Annot<T> {
 }
 
 impl<T> Annot<T> {
-    fn new(value: T, loc: Loc) -> self {
+    fn new(value: T, loc: Loc) -> Self {
         Self { value, loc }
     }
 }
@@ -106,7 +106,7 @@ fn lex(input: &str) -> Result<Vec<Token>, LexError> {
     }
     while pos < input.len() {
         match input[pos] {
-            b'0'...b'9' => lex_a_token!(lex_number(input, pos)),
+            b'0'..=b'9' => lex_a_token!(lex_number(input, pos)),
             b'+' => lex_a_token!(lex_plus(input, pos)),
             b'-' => lex_a_token!(lex_minus(input, pos)),
             b'*' => lex_a_token!(lex_asterisk(input, pos)),
@@ -142,23 +142,23 @@ fn lex_plus(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
 }
 
 fn lex_minus(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
-    consume_byte(input, start, b'-').map(|(_, end)| (Token::plus(Loc(start, end)), end))
+    consume_byte(input, start, b'-').map(|(_, end)| (Token::minus(Loc(start, end)), end))
 }
 
 fn lex_asterisk(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
-    consume_byte(input, start, b'*').map(|(_, end)| (Token::plus(Loc(start, end)), end))
+    consume_byte(input, start, b'*').map(|(_, end)| (Token::asterisk(Loc(start, end)), end))
 }
 
-fn lex_slach(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
-    consume_byte(input, start, b'/').map(|(_, end)| (Token::plus(Loc(start, end)), end))
+fn lex_slash(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
+    consume_byte(input, start, b'/').map(|(_, end)| (Token::slash(Loc(start, end)), end))
 }
 
 fn lex_lparen(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
-    consume_byte(input, start, b'(').map(|(_, end)| (Token::plus(Loc(start, end)), end))
+    consume_byte(input, start, b'(').map(|(_, end)| (Token::lparen(Loc(start, end)), end))
 }
 
 fn lex_rparen(input: &[u8], start: usize) -> Result<(Token, usize), LexError> {
-    consume_byte(input, start, b')').map(|(_, end)| (Token::plus(Loc(start, end)), end))
+    consume_byte(input, start, b')').map(|(_, end)| (Token::rparen(Loc(start, end)), end))
 }
 
 fn recognize_many(input: &[u8], mut pos: usize, mut f: impl FnMut(u8) -> bool) -> usize {
@@ -183,6 +183,24 @@ fn lex_number(input: &[u8], pos: usize) -> Result<(Token, usize), LexError> {
 fn skip_spaces(input: &[u8], pos: usize) -> Result<((), usize), LexError> {
     let pos = recognize_many(input, pos, |b| b" \n\t".contains(&b));
     Ok(((), pos))
+}
+
+
+#[test]
+fn test_lexer() {
+    assert_eq!(
+        lex("1 + 2 * 3 - -10"),
+        Ok(vec![
+            Token::number(1, Loc(0, 1)),
+            Token::plus(Loc(2, 3)),
+            Token::number(2, Loc(4, 5)),
+            Token::asterisk(Loc(6, 7)),
+            Token::number(3, Loc(8, 9)),
+            Token::minus(Loc(10, 11)),
+            Token::minus(Loc(12, 13)),
+            Token::number(10, Loc(13, 15)),
+        ])
+    )
 }
 
 fn main() {
