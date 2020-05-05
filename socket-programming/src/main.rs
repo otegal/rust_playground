@@ -26,6 +26,7 @@ fn main() {
             }
             "client" => {
                 // TODO implement
+                tcp_client::connect(address).unwrap_or_else(|e| error!("{}", e));
             }
             _ => {
                 missing_role();
