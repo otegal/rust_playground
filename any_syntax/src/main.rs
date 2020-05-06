@@ -44,6 +44,25 @@ fn main() {
     answer = test(50);
     println!("answer is {}", answer);
 
+    let an = add_two(10, 20);
+    println!("an is {}", an);
+    let an = add_one(30);
+    println!("an is {}", an);
+
+    let a = Sample::new(10);
+    let ans = a.inc();
+    println!("ans is {}", ans);
+    let ans = a.add(20);
+    println!("ans is {}", ans);
+
+    let num = 10;
+    let add_one = |x| {num + x};
+    let add_two = |x, y| {x + y};
+
+    let ans = add_one(1);
+    println!("ans is {}", ans);
+    let ans = add_two(10, 20);
+    println!("ans is {}", ans);
 }
 
 fn string_length(s : &String) -> usize {
@@ -60,4 +79,28 @@ fn test(x: i32) -> i32 {
         ans = 100;
     }
     ans
+}
+
+fn add_two(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+
+struct Sample {
+    x: i32,
+}
+
+impl Sample {
+    fn new(x: i32) -> Sample {
+        Sample {x: x}
+    }
+    fn inc(&self) -> i32 {
+        self.x + 1
+    }
+    fn add(&self, x: i32) -> i32 {
+        self.x + x
+    }
 }
