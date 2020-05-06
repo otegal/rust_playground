@@ -15,4 +15,14 @@ fn main() {
     let a = ["A", "B", "C"];
     println!("{}", a[0]);
     println!("{}", a[2]);
+
+
+    let z = String::from("Hello");
+    let len = string_length(z);
+    println!("len is {}", len);
+}
+
+fn string_length(s : String) -> usize {
+    let length = s.len();
+    length
 }
