@@ -18,11 +18,12 @@ fn main() {
 
 
     let z = String::from("Hello");
-    let len = string_length(z);
+    let len = string_length(&z);
     println!("len is {}", len);
+    println!("z is {}", z);
 }
 
-fn string_length(s : String) -> usize {
+fn string_length(s : &String) -> usize {
     let length = s.len();
     length
 }
