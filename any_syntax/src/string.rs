@@ -38,6 +38,19 @@ pub fn string_practice() {
     println!("s is {}", s);
     let s = String::from("hello rust world.");
     println!("s is {}", s);
+
+    let s = "こんにちは rust コードの世界";
+    println!("s is {}", s);
+
+    // 以下はバイト数で何文字目かを取りに行くので日本語だと、3バイト文字の中途半端なところを取りに行く
+    // let hello = &s[0..5];
+    // let world = &s[11..];
+
+    // これならOK
+    let hello = &s[0..15];
+    let world = &s[21..];
+    println!("こんにちは is {}", hello);
+    println!("コードの世界 is {}", world);
 }
 
 fn test() {
