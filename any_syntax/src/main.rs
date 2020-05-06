@@ -1,10 +1,11 @@
 fn main() {
-    println!("Hello, world!");
-    let sum = add(1, 2);
-    println!("{}", sum);
-}
+    let dog = "dog";
+    let cat = "cat";
+    println!("{} and {}", dog, cat);
 
-fn add(x : i32, y : i32) -> i32 {
-    println!("call add");
-    x + y
+    let s1 = String::from("Hello");
+    let s2 = String::from("Rust");
+    let s3 = String::from("World");
+    let s = s1 + " " + &s2 + " " + &s3;
+    println!("{}", s)
 }
