@@ -26,9 +26,38 @@ fn main() {
     println!("q is {}", q);
     q = 200;
     println!("q is {}", q);
+
+    let w = 100;
+    println!("w is {}", w);
+    {
+        let w = 200;
+        println!("w is {}", w);
+    }
+    println!("w is {}", w);
+
+    let mut answer = test(-9);
+    println!("answer is {}", answer);
+
+    answer = test(200);
+    println!("answer is {}", answer);
+
+    answer = test(50);
+    println!("answer is {}", answer);
+
 }
 
 fn string_length(s : &String) -> usize {
     let length = s.len();
     length
+}
+
+fn test(x: i32) -> i32 {
+    let mut ans = x;
+    if x < 0 {
+        ans = 0;
+    }
+    if x > 100 {
+        ans = 100;
+    }
+    ans
 }
