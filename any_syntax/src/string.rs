@@ -51,6 +51,19 @@ pub fn string_practice() {
     let world = &s[21..];
     println!("こんにちは is {}", hello);
     println!("コードの世界 is {}", world);
+
+    // 文字列をchar型のベクター型にして日本語を取り扱う方法
+    let s = "This is ねこ😸neko 文字列";
+    let mut v : Vec<char> = Vec::new();
+    for char in s.chars() {
+        v.push(char);
+    }
+    let v = &v[8..15];
+    let mut s = String::new();
+    for char in v {
+        s.push(*char)
+    }
+    println!("s is {}", s);
 }
 
 fn test() {
