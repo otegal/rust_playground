@@ -7,5 +7,12 @@ fn main() {
     let s2 = String::from("Rust");
     let s3 = String::from("World");
     let s = s1 + " " + &s2 + " " + &s3;
-    println!("{}", s)
+    println!("{}", s);
+
+    let t = ("hh", 30);
+    println!("name is {} age {}", t.0, t.1);
+
+    let a = ["A", "B", "C"];
+    println!("{}", a[0]);
+    println!("{}", a[2]);
 }
