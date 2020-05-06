@@ -5,4 +5,6 @@ pub fn string_practice() {
     println!("ch is {}", ch);
     let ch = '😃';
     println!("ch is {}", ch);
+    let ch = '\u{1F431}';
+    println!("ch is {}", ch);
 }
