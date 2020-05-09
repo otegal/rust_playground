@@ -27,6 +27,11 @@ pub fn practice() {
         Ok(n) => println!("Ok: {}", n),
         Err(err) => println!("Error: {:?}", err)
     }
+
+    let n = "100".parse::<i32>().expect("これは数値ではありません");
+    println!("n is {}", n);
+    let n = "XXX".parse::<i32>().expect("これは数値ではありません");
+    println!("n is {}", n);
 }
 
 fn half_number(s: &str) -> Result<i32, ParseIntError> {
