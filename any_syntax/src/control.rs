@@ -6,6 +6,11 @@ enum LANG {
     FRANCH = 33,
 }
 
+enum Option<T> {
+    Some(T),
+    None,
+}
+
 pub fn control_practice() {
     let v = vec![10, 20, 30, 40, 50];
     print!("v is ");
@@ -38,4 +43,29 @@ pub fn control_practice() {
         _ => "未定義"
     };
     println!("lang is {}", m);
+
+    let x = Some(10);
+    let v = match x {
+        Some(i) => i,
+        None => -1,
+    };
+    println!("v is {}", v);
+
+    let x = Some(10);
+    match x {
+        Some(i) => println!("i is {}", i),
+        _ => (),
+    };
+    if let Some(i) = x {
+        println!("i is {}", i);
+    }
+
+    let x = 3;
+    let m = match x {
+        1 => "one",
+        2 => "two",
+        3 => "three",
+        _ => "other",
+    };
+    println!("m is {}", m);
 }
