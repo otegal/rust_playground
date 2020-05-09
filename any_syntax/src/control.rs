@@ -5,4 +5,16 @@ pub fn control_practice() {
         print!("{} ", i);
     }
     println!("");
+
+    // イテレータ
+    for i in v.iter() {
+        print!("{} ", i);
+    }
+    println!("");
+
+    // indexあり
+    for (index, value) in v.iter().enumerate() {
+        print!("{}:{} ", index, value);
+    }
+    println!("");
 }
