@@ -5,6 +5,26 @@ struct Person {
     addr: String,
 }
 
+impl Person {
+    fn print(&self) {
+        println!("{}: {} ({}) in {}", self.id, self.name, self.age, self.addr);
+    }
+    fn print_t(&self, private: bool) {
+        if private == true {
+            println!("{}: {}", self.id, self.name);
+        } else {
+            println!("{}: {} ({}) in {}", self.id, self.name, self.age, self.addr);
+        }
+    }
+    fn to_str(&self) -> String {
+        let s = format!("{}: {} ({}) in {}",  self.id, self.name, self.age, self.addr);
+        s
+    }
+    fn add_age(&mut self, n: i32) {
+        self.age += n;
+    }
+}
+
 pub fn practice() {
     let mut pa = Person {
         id: 100,
@@ -27,6 +47,23 @@ pub fn practice() {
     for p in &people {
         print_person(p);
     }
+
+    // method section
+    let mut pa = Person {
+        id: 100,
+        name: String::from("hh"),
+        age: 50,
+        addr: String::from("tokyo"),
+    };
+    pa.print();
+    pa.print_t(true);
+    pa.print_t(false);
+    let s = pa.to_str();
+    println!("s is {}", s);
+
+    pa.print();
+    pa.add_age(1);
+    pa.print();
 }
 
 fn new_person(id: i32, name:&str) -> Person {
