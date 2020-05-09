@@ -26,4 +26,15 @@ pub fn practice() {
         let b = std::mem::transmute::<u32, [u8; 4]>(a);
         println!("b[] is {:X} {:X} {:X} {:X}", b[0], b[1], b[2], b[3])
     }
+
+    let v = vec![1, 2, 3, 4, 5];
+    println!("v[0] is {}", v[0]);
+    println!("v[4] is {}", v[4]);
+    println!("v.len is {}", v.len());
+
+    println!("v.get(0) is {:?}", v.get(0));
+    println!("v.get(4) is {:?}", v.get(4));
+    println!("v.get(0) is {}", v.get(0).unwrap());
+    println!("v.get(4) is {}", v.get(4).unwrap());
+
 }
