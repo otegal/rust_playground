@@ -37,4 +37,33 @@ pub fn practice() {
     println!("v.get(0) is {}", v.get(0).unwrap());
     println!("v.get(4) is {}", v.get(4).unwrap());
 
+    let mut v: Vec<i32> = Vec::new();
+    println!("v.len is {}", v.len());
+    v.push(10);
+    v.push(20);
+    v.push(30);
+    println!("v.len is {}", v.len());
+    println!("pop is {:?}", v.pop());
+    println!("pop is {:?}", v.pop());
+    println!("pop is {:?}", v.pop());
+    println!("v.len is {}", v.len());
+
+    let v = vec![1, 2, 3, 4, 5];
+    print!("for is ");
+    for i in &v {
+        print!("{} ", i);
+    }
+    println!("");
+
+    print!("for and iter is ");
+    for i in v.iter() {
+        print!("{} ", i);
+    }
+    println!("");
+
+    let v = vec![1, 2, 3, 4, 5];
+    let lst = v.iter().map(|x| x * 10);
+    for i in lst {
+        println!("i is {}", i);
+    }
 }
