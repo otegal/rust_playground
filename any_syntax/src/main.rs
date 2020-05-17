@@ -19,11 +19,15 @@ mod result;
 #[allow(dead_code)]
 mod generics;
 
+#[allow(dead_code)]
+mod ownership;
+
 fn main() {
     // types::types_practice();
     // string::string_practice();
     // control::control_practice();
     // array_and_vector::practice();
     // result::practice();
-    generics::practice();
+    // generics::practice();
+    ownership::practice();
 }
