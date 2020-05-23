@@ -25,6 +25,9 @@ mod ownership;
 #[allow(dead_code)]
 mod macros;
 
+#[allow(dead_code)]
+mod web_api;
+
 
 fn main() {
     // types::types_practice();
@@ -34,5 +37,6 @@ fn main() {
     // result::practice();
     // generics::practice();
     // ownership::practice();
-    macros::practice();
+    // macros::practice();
+    web_api::practice();
 }
