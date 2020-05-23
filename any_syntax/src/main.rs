@@ -22,6 +22,10 @@ mod generics;
 #[allow(dead_code)]
 mod ownership;
 
+#[allow(dead_code)]
+mod macros;
+
+
 fn main() {
     // types::types_practice();
     // string::string_practice();
@@ -29,5 +33,6 @@ fn main() {
     // array_and_vector::practice();
     // result::practice();
     // generics::practice();
-    ownership::practice();
+    // ownership::practice();
+    macros::practice();
 }
