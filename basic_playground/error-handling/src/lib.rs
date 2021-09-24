@@ -21,6 +21,7 @@ fn file_open_return_result_type(path: &str) -> std::io::Result<String> {
 
 #[test]
 fn test_file_open_return_result_type() {
+    // failed
     let not_exist_file_path = "s.txt";
 
     let fail_result = file_open_return_result_type(not_exist_file_path);
@@ -37,4 +38,22 @@ fn test_file_open_return_result_type() {
         .map(|_s| 0)
         .unwrap_or_else(|_err| 1);
     assert_eq!(method_chain_unwrap, 1);
+
+    // success
+    let exist_file_path = "src/lib.rs";
+
+    let fail_result = file_open_return_result_type(exist_file_path);
+    assert_eq!(fail_result.is_err(), false);
+    assert_eq!(fail_result.is_ok(), true);
+
+    let unwrap = match file_open_return_result_type(exist_file_path) {
+        Ok(_s) => "ok",
+        Err(_e) => "err",
+    };
+    assert_eq!(unwrap, "ok");
+
+    let method_chain_unwrap = file_open_return_result_type(exist_file_path)
+        .map(|_s| 0)
+        .unwrap_or_else(|_err| 1);
+    assert_eq!(method_chain_unwrap, 0);
 }
